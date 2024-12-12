@@ -154,5 +154,4 @@ The following libraries from the `requirements` file are used:
 
 ## Conclusion
 
-This code provides a robust solution for extracting TikTok comments, analyzing their sentiment, and generating insightful visualizations. It is suitable for marketing analysis, trend identification, and understanding audience sentiment. Future improvements could include multilingual sentiment analysis, handling TikTok API rate limits more effectively, and refining the placeholder visualizations for empty datasets.
-
+This code provides a robust solution for extracting TikTok comments, analyzing their sentiment, and generating insightful visualizations. It is suitable for marketing analysis, trend identification, and understanding audience sentiment.
