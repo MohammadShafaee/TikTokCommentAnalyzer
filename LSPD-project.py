@@ -1,22 +1,36 @@
-from TikTokApi import TikTokApi
+import os
 import asyncio
 import datetime
 import pandas as pd
-from transformers import pipeline
-import os
+import matplotlib
+matplotlib.use('Agg')  # Use Agg backend for headless environments
 import matplotlib.pyplot as plt
+from typing import Any, Dict
+from TikTokApi import TikTokApi
+from transformers import pipeline
+import calendar
 
 # Initialize sentiment analysis pipeline
 pipe = pipeline("text-classification", model="cardiffnlp/twitter-roberta-base-sentiment-latest")
 
+def get_script_directory() -> str:
+    """Get the directory of the current script."""
+    return os.path.dirname(os.path.abspath(__file__))
 
-async def fetch_and_analyze_comments(video_id, output_dir="output"):
+async def fetch_and_analyze_comments(video_id: str) -> Dict[str, Any]:
     """
-    Fetches comments from a TikTok video, performs sentiment analysis,
-    generates time series plots, bar graph, and saves them to a directory.
-    """
-    comments_data = []  # In-memory storage for comments
+    Fetch comments from a TikTok video by video_id, perform sentiment analysis,
+    and generate monthly-based charts.
 
+    Args:
+        video_id (str): The TikTok video ID.
+
+    Returns:
+        Dict[str, Any]: Contains comments data and paths to the charts.
+    """
+    script_dir = get_script_directory()
+
+    comments_data = []
 
     # Fetch comments
     async with TikTokApi() as api:
