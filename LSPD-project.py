@@ -14,20 +14,9 @@ import calendar
 pipe = pipeline("text-classification", model="cardiffnlp/twitter-roberta-base-sentiment-latest")
 
 def get_script_directory() -> str:
-    """Get the directory of the current script."""
     return os.path.dirname(os.path.abspath(__file__))
 
 async def fetch_and_analyze_comments(video_id: str) -> Dict[str, Any]:
-    """
-    Fetch comments from a TikTok video by video_id, perform sentiment analysis,
-    and generate monthly-based charts.
-
-    Args:
-        video_id (str): The TikTok video ID.
-
-    Returns:
-        Dict[str, Any]: Contains comments data and paths to the charts.
-    """
     script_dir = get_script_directory()
 
     comments_data = []
@@ -52,31 +41,6 @@ async def fetch_and_analyze_comments(video_id: str) -> Dict[str, Any]:
                 'comment_language': comment_data.get('comment_language', ''),
                 'user_nickname': comment_data.get('user', {}).get('nickname', '')
             })
-
-    # Handle no comments scenario
-    if not comments_data:
-        pd.DataFrame([]).to_csv(os.path.join(script_dir, "tiktok_comments_with_sentiment.csv"), index=False)
-        line_chart_path = os.path.join(script_dir, 'sentiment_over_time.png')
-        bar_chart_path = os.path.join(script_dir, 'sentiment_bar_chart.png')
-
-        # Empty line chart
-        plt.figure()
-        plt.text(0.5, 0.5, 'No data available', ha='center', va='center')
-        plt.savefig(line_chart_path)
-        plt.close()
-
-        # Empty bar chart
-        plt.figure()
-        plt.text(0.5, 0.5, 'No data available', ha='center', va='center')
-        plt.savefig(bar_chart_path)
-        plt.close()
-
-        return {
-            "comments": [],
-            "line_chart_path": line_chart_path,
-            "bar_chart_path": bar_chart_path
-        }
-
     # Perform sentiment analysis
     texts = [c['text'] for c in comments_data]
     results = pipe(texts, batch_size=32, truncation=True)
@@ -169,4 +133,4 @@ async def fetch_and_analyze_comments(video_id: str) -> Dict[str, Any]:
     }
 
 if __name__ == "__main__":
-    asyncio.run(fetch_and_analyze_comments(7375925889818758443))
+    asyncio.run(fetch_and_analyze_comments(7375925889818758443)) #Place your video url here
