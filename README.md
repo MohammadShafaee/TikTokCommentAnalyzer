@@ -2,7 +2,7 @@
 
 ## Overview
 
-The provided Python code is designed to fetch comments from a specified TikTok video, analyze their sentiment using a pre-trained sentiment analysis model, and generate visualizations of sentiment trends over time. The results are saved in a CSV file and visualized as bar and line charts. Additionally, the updated code now handles scenarios where no comments are available.
+The provided Python code is designed to fetch comments from a specified TikTok video, analyze their sentiment using a pre-trained sentiment analysis model, and generate visualizations of sentiment trends over time. The results are saved in a CSV file and visualized as bar and line charts. 
 
 ---
 
@@ -14,25 +14,16 @@ Using this code you can analyze the sentiments of the comments under a TikTok po
 ## Getting Started
 
 **Note:** Installation requires Python 3.9+
-
-1. Install the TikTokApi by running the following commands in your terminal:
+1. Install the requirements by running:
    ```
-   pip install TikTokApi
-   python -m playwright install
+   pip install -r requirements.txt
    ```
-   Make sure you have installed version 1.36.0 of Playwright.
 
 2. Set your `ms_token` in your system variables. You can find `ms_token` by visiting TikTok.com and opening the inspection mode of your browser. Navigate to the Application tab, where you will find the variable "msToken" and its value. Copy the value and run the following command in your terminal:
    ```
    set ms_token=the_value_you_copied
    ```
-
-3. Install the Transformers library by running:
-   ```
-   pip install transformers
-   ```
-
-Now you have all the dependencies installed and can run the script.
+Now you have all the dependencies installed and can run the script. 
 
 ---
 
@@ -43,7 +34,7 @@ Now you have all the dependencies installed and can run the script.
    - **Purpose:** Fetch comments from a specified TikTok video.
    - **Functionality:**
      - Uses the `ms_token` (TikTok authentication token) to establish a session.
-     - Retrieves up to 10,000 comments for a specified video ID.
+     - Retrieves up to 10,000 comments for a specified video ID. You can change this according to your need.
    - **API Calls Performed:**
      - `api.create_sessions()` to initiate TikTok sessions.
      - `video.comments()` to fetch comments asynchronously.
@@ -51,7 +42,7 @@ Now you have all the dependencies installed and can run the script.
 2. **Hugging Face Transformers:**
 
    - **Purpose:** Perform sentiment analysis on the fetched comments.
-   - **Model Used:** `cardiffnlp/twitter-roberta-base-sentiment-latest`.
+   - **Model Used:** `cardiffnlp/twitter-roberta-base-sentiment-latest` trained on ~124 million twitter comments.
    - **API Calls Performed:**
      - `pipeline()` for sentiment classification.
 
@@ -147,17 +138,6 @@ The following libraries from the `requirements` file are used:
 
 1. **Line Chart:** Sentiment trends over time (`sentiment_over_time.png`).
 2. **Bar Chart:** Total sentiment counts (`sentiment_bar_chart.png`).
-
----
-
-## Limitations and Notes
-
-- The code depends on the `ms_token` environment variable being correctly set.
-- Fetching 10,000 comments per video can be time-consuming and subject to TikTok API rate limits.
-- The sentiment analysis pipeline may misclassify some comments due to the nuances of language and context.
-- Ensure the output directory (`output`) and static image directory (`static/images`) exist before execution.
-- The script directory is automatically determined, simplifying file management.
-
 ---
 
 ## Example Dataset
