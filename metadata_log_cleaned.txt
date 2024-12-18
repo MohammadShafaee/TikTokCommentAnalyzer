@@ -1,0 +1,68 @@
+Here’s a structured list of all metadata fields extracted from the provided data:
+
+Top-Level Fields
+author_pin: Indicates if the comment is pinned by the author (Boolean).
+aweme_id: ID of the TikTok video (String).
+cid: Unique ID of the comment (String).
+collect_stat: Collect status, possibly for analytics (Integer).
+comment_language: Language of the comment (String).
+comment_post_item_ids: Item IDs related to the comment, if any (Nullable).
+create_time: Timestamp of when the comment was created (Integer).
+digg_count: Number of likes on the comment (Integer).
+image_list: List of images in the comment, if any (Nullable).
+is_author_digged: Indicates if the author liked the comment (Boolean).
+is_comment_translatable: Indicates if the comment can be translated (Boolean).
+label_list: List of labels associated with the comment, if any (Nullable).
+no_show: Indicates if the comment is hidden or not shown (Boolean).
+reply_comment: Nested reply comment data, if any (Nullable).
+reply_comment_total: Number of replies to the comment (Integer).
+reply_id: ID of the parent comment if this is a reply (String).
+reply_to_reply_id: ID of the parent reply if this is a reply to a reply (String).
+share_info: Dictionary containing sharing-related information:
+acl: Access control list details (Dictionary).
+desc: Description of the shared content (String).
+title: Title of the shared content (String).
+url: URL of the shared content (String).
+sort_extra_score: Sorting scores for replies and visibility (Dictionary):
+reply_score: Sorting score for replies (Float).
+show_more_score: Sorting score for "show more" visibility (Float).
+sort_tags: Tags used for sorting or categorization (String).
+status: Status of the comment (Integer).
+stick_position: Position of the comment if pinned (Integer).
+text: Text of the comment (String).
+text_extra: List of extra data related to the text (List).
+trans_btn_style: Style of the translate button for the comment (Integer).
+user: Dictionary containing user-related information:
+account_labels: Labels associated with the user account (Nullable).
+ad_cover_url: URL for ad cover, if applicable (Nullable).
+avatar_thumb: Dictionary containing avatar thumbnail details:
+uri: Avatar URI (String).
+url_list: List of URLs for the avatar (List).
+url_prefix: Prefix for the avatar URL (Nullable).
+bold_fields: Fields displayed in bold for the user (Nullable).
+can_message_follow_status_list: Messaging permissions (Nullable).
+can_set_geofencing: Indicates if geofencing can be set (Nullable).
+cha_list: List of challenges or hashtags associated with the user (Nullable).
+custom_verify: Custom verification information (String).
+enterprise_verify_reason: Reason for enterprise verification (String).
+events: Events associated with the user (Nullable).
+followers_detail: Details of followers (Nullable).
+geofencing: Geofencing settings (Nullable).
+homepage_bottom_toast: Details of homepage bottom toast (Nullable).
+item_list: List of items associated with the user (Nullable).
+mutual_relation_avatars: Mutual relation avatar details (Nullable).
+need_points: Points needed for specific actions (Nullable).
+nickname: User’s display name (String).
+platform_sync_info: Platform synchronization info (Nullable).
+relative_users: Related users (Nullable).
+search_highlight: Search highlight info (Nullable).
+sec_uid: Secure user ID (String).
+shield_edit_field_info: Shielded fields (Nullable).
+type_label: Label for user type (Nullable).
+uid: User ID (String).
+unique_id: User’s unique username (String).
+user_profile_guide: User profile guide (Nullable).
+user_tags: Tags associated with the user (Nullable).
+white_cover_url: URL for the user’s white cover, if any (Nullable).
+user_buried: Indicates if the user is hidden (Boolean).
+user_digged: Indicates if the user liked the comment (Integer).

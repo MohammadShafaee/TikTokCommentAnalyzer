@@ -21,6 +21,11 @@ async def fetch_and_analyze_comments(video_id: str) -> Dict[str, Any]:
 
     comments_data = []
 
+    # Create or clear metadata log file
+    metadata_log_path = os.path.join(script_dir, "metadata_log.txt")
+    with open(metadata_log_path, "w", encoding="utf-8") as log_file:
+        log_file.write("Metadata Log:\n\n")
+
     # Fetch comments
     async with TikTokApi() as api:
         ms_token = os.getenv("ms_token")
@@ -32,6 +37,11 @@ async def fetch_and_analyze_comments(video_id: str) -> Dict[str, Any]:
 
         async for comment in video.comments(count=10000):
             comment_data = comment.as_dict
+
+            # Log all available metadata
+            with open(metadata_log_path, "a", encoding="utf-8") as log_file:
+                log_file.write(f"{comment_data}\n\n")
+
             create_time = datetime.datetime.fromtimestamp(comment_data.get('create_time', 0))
             comments_data.append({
                 'text': comment_data.get('text', ''),
@@ -39,8 +49,11 @@ async def fetch_and_analyze_comments(video_id: str) -> Dict[str, Any]:
                 'digg_count': comment_data.get('digg_count', 0),
                 'reply_comment_total': comment_data.get('reply_comment_total', 0),
                 'comment_language': comment_data.get('comment_language', ''),
-                'user_nickname': comment_data.get('user', {}).get('nickname', '')
+                'user_nickname': comment_data.get('user', {}).get('nickname', ''),
+                'user_id': comment_data.get('user', {}).get('id', ''),  # Example of additional metadata
+                'comment_id': comment_data.get('cid', '')  # Example of additional metadata
             })
+
     # Perform sentiment analysis
     texts = [c['text'] for c in comments_data]
     results = pipe(texts, batch_size=32, truncation=True)
@@ -133,4 +146,4 @@ async def fetch_and_analyze_comments(video_id: str) -> Dict[str, Any]:
     }
 
 if __name__ == "__main__":
-    asyncio.run(fetch_and_analyze_comments(7375925889818758443)) #Place your video url here
+    asyncio.run(fetch_and_analyze_comments(7375925889818758443))  # Place your video ID here
